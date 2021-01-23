@@ -1,5 +1,5 @@
 const Employee = require("../lib/Employee.js");
-var Engineer = require("../lib/Engineer.js");
+const Engineer = require("../lib/Engineer.js");
 
 
 test("gets info from Engineer", () => {
