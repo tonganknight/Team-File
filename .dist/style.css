@@ -1,0 +1,33 @@
+/*Header Elements*/
+.flex-body{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 100%;  
+}
+
+
+
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    font-size: 25px;
+    margin-bottom: 50px;
+}
+
+.card{
+   margin-right: 15px;
+
+
+    
+}
+
+
+
+

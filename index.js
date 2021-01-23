@@ -158,9 +158,15 @@ return inquirer.prompt([
 {
     type: 'input',
     name: 'engineerGithub',
-    message: "Please enter Engineer's Github profile",
+    message: "Please enter Engineer's Github profile address",
     when: (answers) => answers.engineerEmail
 },   
+{
+    type: 'input',
+    name: 'engineerGithubname',
+    message: "please enter Engineer's Github name.",
+    when: (answers) => answers.engineerGithub
+},
 {
     type: 'confirm',
     name: 'finalize',
