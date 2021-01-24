@@ -160,76 +160,85 @@ const { finished } = require('stream');
     when: (answers) => answers.engineerGithub
 },
 {
-    type: 'loop',
+    type: 'confirm',
     name: 'finalize',
     message: "Would you like to enter another employee?",
-    questions: [
+    default: false
+},
+
                 {
                 type: 'checkbox',
-                name: 'addTeammember',
+                name: 'laddTeammember',
                 message: 'Would you like to add a Intern, or an Engineer to your team?',
                 choices: ["Intern", "Engineer"],
-                
+                when: (answers) => answers.finalize == true
                 },
                 {
                     type: 'input',
-                    name: 'LInternname',
+                    name: 'lInternname',
                     message: "Please enter Intern's name.",
-                    when: (answers) => answers.addTeammember == 'Intern'
+                    when: (answers) => answers.laddTeammember == 'Intern'
                 
                 },
                 {
                     type: 'input',
-                    name: 'LInternid',
+                    name: 'lInternid',
                     message: "Please enter Intern's Employee Id",
-                    when: (answers) => answers.LInternname
+                    when: (answers) => answers.lInternname
                 
                 },
                 {
                     type: 'input',
-                    name: "LinternEmail",
+                    name: "linternEmail",
                     message: "Please enter Intern's Email",
-                    when: (answers) => answers.LInternid
+                    when: (answers) => answers.lInternid
                 },
                 {
                     type: 'input',
-                    name: 'LinternSchool',
+                    name: 'linternSchool',
                     message: "Please enter Intern's School.",
-                    when: (answers) => answers.LinternEmail
+                    when: (answers) => answers.linternEmail
                 },
                 {
                     type: 'input',
-                    name: 'LengineerName',
+                    name: 'lengineerName',
                     message: "Please enter Engineer's name.",
-                    when: (answers) => answers.addTeammember == "Engineer"
+                    when: (answers) => answers.laddTeammember == "Engineer"
                 },
                 {
                     type: 'input',
-                    name: 'LengineerId',
+                    name: 'lengineerId',
                     message: "Please enter Engineer's Employee Id",
-                    when: (answers) => answers.LengineerName,
+                    when: (answers) => answers.lengineerName,
                     
                 },
                 {
                     type: 'input',
-                    name: "LengineerEmail",
+                    name: "lengineerEmail",
                     message: "Please enter Engineer's Email",
-                    when: (answers) => answers.LengineerId
+                    when: (answers) => answers.lengineerId
                 },
                 {
                     type: 'input',
-                    name: 'LengineerGithub',
+                    name: 'lengineerGithub',
                     message: "Please enter Engineer's Github profile address",
-                    when: (answers) => answers.LengineerEmail
+                    when: (answers) => answers.lengineerEmail
                 },   
                 {
                     type: 'input',
-                    name: 'LengineerGithubname',
+                    name: 'lengineerGithubname',
                     message: "please enter Engineer's Github name.",
-                    when: (answers) => answers.LengineerGithub
+                    when: (answers) => answers.lengineerGithub
                 },
+                {
+                    type: 'confirm',
+                    name: 'finalize',
+                    message: "Would you like to enter another employee?",
+                    default: false
+                },
+                
 
-                ]}
+                
 
     ])
     
@@ -293,20 +302,20 @@ mainMenu().then(answers =>{
       var employee = new Intern(answers.Internname, answers.Internid, answers.internEmail, answers.internSchool)
 
         var internName = answers.Internname;
-        var internId = answers.engineerId;
+        var internId = answers.Internid;
         var internEmail = answers.internEmail;
         var internSchool = answers.internSchool;
 
     
 
-    if(answers.engineerName){
+
     var Producer = new Engineer(answers.engineerId, answers.engineerId, answers.engineerEmail, answers.engineeremail, answers.engineerGithub)
-    var engineername = answers.engineerName;
-    var engineerid = answers.engineerId;
-    var engineeremail = answers.engineerEmail;
-    var engineerguthubprofile = answers.engineerGithub;
-    var engineergithubname = answers.engineerGithubname;
-    }
+    var engineername = answers.lengineerName;
+    var engineerid = answers.lengineerId;
+    var engineeremail = answers.lengineerEmail;
+    var engineerguthubprofile = answers.lengineerGithub;
+    var engineergithubname = answers.lengineerGithubname;
+    
 
 
 
@@ -341,7 +350,7 @@ mainMenu().then(answers =>{
     <div class=" card-body">
     <ul class=" text-white bg-secondary list-group list-group-flush">
     <li class=" bg-secondary list-group-item">ID:<span>${managerId} </span></li>
-    <li class=" bg-secondary list-group-item">Email:<a target="_blank" href="${managerEmail}">${managerEmail}</a></li>
+    <li class=" bg-secondary list-group-item">Email: <a target="_blank" href="mailto:piotr@mailtrap.io,${managerEmail}">${managerEmail}</a></li>
     <li class=" bg-secondary list-group-item">Office Number <span>${managerOfficenumber}</span></li>
     </ul>
     </div>
@@ -350,9 +359,7 @@ mainMenu().then(answers =>{
 
     const generateEngineer =() =>{
 
-        if(!answers.engineerName){
-            return ''
-        }
+        
 
         return `
         <div class=" card flex card text-white bg-secondary mb-3" style="max-width: 18rem;">
@@ -360,7 +367,7 @@ mainMenu().then(answers =>{
         <div class=" card-body">
         <ul class=" text-white bg-secondary list-group list-group-flush">
         <li class=" bg-secondary list-group-item">ID: <span>${engineerid} </span></li>
-        <li class=" bg-secondary list-group-item">Email: <a target="_blank" href="${engineeremail}">${engineeremail}</a></li>
+        <li class=" bg-secondary list-group-item">Email: <a target="_blank" href="mailto:piotr@mailtrap.io,${engineeremail}">${engineeremail}</a></li>
         <li class=" bg-secondary list-group-item">Github: <a target="_blank" href="${engineerguthubprofile}">${engineergithubname}</a></li>
         </ul>
         </div>
@@ -370,9 +377,7 @@ mainMenu().then(answers =>{
 
     const generateIntern =() =>{
 
-        if(!answers.internName){
-            return ''
-        }
+       
 
 
         return `
@@ -381,7 +386,7 @@ mainMenu().then(answers =>{
     <div class=" card-body">
     <ul class=" text-white bg-secondary list-group list-group-flush">
     <li class=" bg-secondary list-group-item">ID: <span>${internId} </span></li>
-    <li class=" bg-secondary list-group-item">Email: <span>${internEmail} </span></li>
+    <li class=" bg-secondary list-group-item">Email: <a target="_blank" href="mailto:piotr@mailtrap.io,${internEmail}">${internEmail}</a></li>
     <li class=" bg-secondary list-group-item">School <span>${internSchool}</span></li>
     </ul>
     </div>
