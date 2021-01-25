@@ -232,7 +232,7 @@ const { finished } = require('stream');
                 },
                 {
                     type: 'confirm',
-                    name: 'finalize',
+                    name: 'finished',
                     message: "Would you like to enter another employee?",
                     default: false
                 },
